@@ -1,0 +1,40 @@
+<mat-dialog-content fxLayout class="mat-typography">
+
+ 
+ <mat-card class="my-card">
+    <mat-icon><img src="../../../assets/logo--registration.png" style="width: 2vw; height: 2vw;"> </mat-icon>
+    <br>
+    <br>
+    <br>
+    <h2 mat-dialog-title>New Account</h2>
+    <mat-card-content>
+       <form class="my-form">  
+          <mat-form-field class="full-width">
+             <mat-label>Username</mat-label>
+             <input  matInput  placeholder="Username"  name="Username"  required>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+             <mat-label>Password</mat-label>
+             <input [formControl]="passwordFormControl" [errorStateMatcher]="matcher" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password">
+             <button *ngIf="passwordFormControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="passwordFormControl.setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+             <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Please enter a valid password
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+             <mat-label>Email</mat-label>
+             <input  matInput  placeholder="Email" name="email">
+          </mat-form-field>
+       </form>
+    </mat-card-content>
+ </mat-card>
+ </mat-dialog-content>
+ 
+ <mat-dialog-actions fxLayoutAlign="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="register()">Register Account</button>
+  </mat-dialog-actions>
+ 
